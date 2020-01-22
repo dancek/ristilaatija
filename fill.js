@@ -13,16 +13,13 @@ const DIR_DOWN = 1;
  */
 const ALL_CHARS = "abcdefghijklmnopqrstuvwxyzåäö"; // include Finnish
 const ALL_CHARS_BITMAP = (1 << (ALL_CHARS.length + 1)) - 1;
-const ALL_CHARS_BASE = ALL_CHARS.charCodeAt(0);
 
 function char_to_bitmap(x) {
-  if (x === BLOCK_CHAR)
-    return 0;
-  return x.toLowerCase().charCodeAt(0) - ALL_CHARS_BASE;
+  return ALL_CHARS.indexOf(x.toLowerCase());
 }
 
 function bitmap_to_char(x) {
-  return String.fromCharCode(x + ALL_CHARS_BASE);
+  return ALL_CHARS[x];
 }
 
 class Wordlist {
