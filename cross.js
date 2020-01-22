@@ -725,7 +725,7 @@ function toggleSymmetry() {
 
 function clearFill() {
   for (let i = 0; i < xw.rows; i++) {
-    xw.fill[i] = xw.fill[i].replace(/\w/g, ' '); // replace letters with spaces
+    xw.fill[i] = xw.fill[i].replace(/[^.]/g, ' '); // replace letters with spaces
   }
   isMutated = true;
   updateUI();
