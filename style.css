@@ -287,6 +287,8 @@ kbd {
 
 #sidebar ul.matches li {
   margin: 2px 0;
+  cursor: pointer;
+  user-select: none;
 }
 
 #sidebar ul.matches li:hover {
