@@ -19,7 +19,7 @@ let wordlist = [
   [], [], [], [], [], []
 ];
 
-openDefaultWordlist("/kotus_sanat.txt");
+openDefaultWordlist("kotus_sanat.txt");
 
 //____________________
 // F U N C T I O N S
