@@ -19,7 +19,7 @@ let wordlist = [
   [], [], [], [], [], []
 ];
 
-openDefaultWordlist("https://raw.githubusercontent.com/keiranking/Phil/master/WL-SP.txt");
+openDefaultWordlist("/kotus_sanat.txt");
 
 //____________________
 // F U N C T I O N S
