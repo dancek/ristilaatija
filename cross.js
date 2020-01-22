@@ -384,8 +384,13 @@ function keyboardHandler(e) {
   }
   if (e.which == keyboard.delete) {
     e.preventDefault();
-    let oldContent = xw.fill[current.row][current.col];
-    xw.fill[current.row] = xw.fill[current.row].slice(0, current.col) + BLANK + xw.fill[current.row].slice(current.col + 1);
+    if (e.shiftKey) {
+      // delete entire word
+      clearCurrentWord();
+    } else {
+      // delete single character
+      let oldContent = xw.fill[current.row][current.col];
+      clearSquare(current.row, current.col);
       if (oldContent == BLACK) {
         if (isSymmetrical) {
           xw.fill[symRow] = xw.fill[symRow].slice(0, symCol) + BLANK + xw.fill[symRow].slice(symCol + 1);
@@ -398,7 +403,8 @@ function keyboardHandler(e) {
           e.which = keyboard.up;
         }
       }
-      isMutated = true;
+    }
+    isMutated = true;
   }
   if (e.which >= keyboard.left && e.which <= keyboard.down) {
       e.preventDefault();
@@ -436,6 +442,36 @@ function keyboardHandler(e) {
       activeCell.classList.add("active");
   }
   updateUI();
+}
+
+function clearSquare(row, col) {
+  xw.fill[row] = xw.fill[row].slice(0, col) + BLANK + xw.fill[row].slice(col + 1);
+}
+
+function squareContainsLetter(row, col) {
+  if (row < 0
+      || col < 0
+      || row >= xw.rows
+      || col >= xw.cols)
+    return false;
+  const c = xw.fill[row][col];
+  return c !== BLACK && c !== BLANK;
+}
+
+function clearCurrentWord() {
+  if (current.direction == ACROSS) {
+    for (let i = current.acrossStartIndex; i < current.acrossEndIndex; i++) {
+      if (!squareContainsLetter(current.row - 1, i)
+          && !squareContainsLetter(current.row + 1, i))
+        clearSquare(current.row, i);
+    }
+  } else {
+    for (let j = current.downStartIndex; j < current.downEndIndex; j++) {
+      if (!squareContainsLetter(j, current.col - 1)
+          && !squareContainsLetter(j, current.col + 1))
+        clearSquare(j, current.col);
+    }
+  }
 }
 
 function updateUI() {
