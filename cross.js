@@ -439,9 +439,6 @@ function keyboardHandler(e) {
 }
 
 function updateUI() {
-  if (isMutated) {
-    autoFill(true);  // quick fill
-  }
   updateGridUI();
   updateLabelsAndClues();
   updateActiveWords();
