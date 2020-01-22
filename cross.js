@@ -28,7 +28,7 @@ const DASH = "-";
 const BLANK = " ";
 const ACROSS = "across";
 const DOWN = "down";
-const DEFAULT_SIZE = 15;
+const DEFAULT_SIZE = 13;
 const DEFAULT_TITLE = "Untitled";
 const DEFAULT_AUTHOR = "Anonymous";
 const DEFAULT_CLUE = "(blank clue)";
@@ -274,6 +274,12 @@ current.update();
 //____________________
 // F U N C T I O N S
 
+function createNewCustomSizePuzzle() {
+  let sizeStr = prompt("Input crossword size (cols x rows)", `${xw.cols}x${xw.rows}`);
+  let [ , cols,  , rows] = /(\d+)( *[xX] *(\d+))?/.exec(sizeStr);
+  if (rows) createNewPuzzle(rows, cols);
+}
+
 function createNewPuzzle(rows, cols) {
   xw["clues"] = {};
   xw["title"] = DEFAULT_TITLE;
@@ -298,9 +304,9 @@ function createNewPuzzle(rows, cols) {
     "acrossWord": '',
     "downWord":   '',
     "acrossStartIndex":0,
-    "acrossEndIndex":  DEFAULT_SIZE,
+    "acrossEndIndex":  xw.cols,
     "downStartIndex":  0,
-    "downEndIndex":    DEFAULT_SIZE,
+    "downEndIndex":    xw.rows,
     "direction":  ACROSS
   };
 
@@ -612,8 +618,8 @@ function getWordAt(row, col, direction, setCurrentWordIndices) {
 function getWordIndices(text, position) {
   let start = text.slice(0, position).lastIndexOf(BLACK);
   start = (start == -1) ? 0 : start + 1;
-  let end = text.slice(position, DEFAULT_SIZE).indexOf(BLACK);
-  end = (end == -1) ? DEFAULT_SIZE : Number(position) + end;
+  let end = text.slice(position).indexOf(BLACK);
+  end = (end == -1) ? text.length : Number(position) + end;
   return [start, end];
 }
 
