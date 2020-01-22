@@ -14,10 +14,6 @@
 // ------------------------------------------------------------------------
 
 const keyboard = {
-  "a":      65, "b": 66, "c": 67, "d": 68, "e": 69, "f": 70, "g": 71, "h": 72,
-  "i":      73, "j": 74, "k": 75, "l": 76, "m": 77, "n": 78, "o": 79, "p": 80,
-  "q":      81, "r": 82, "s": 83, "t": 84, "u": 85, "v": 86, "w": 87, "x": 88, "y": 89,
-  "z":      90,
   "black":  190, ".": 190,
   "delete": 8,
   "enter":  13,
@@ -340,14 +336,15 @@ function mouseHandler(e) {
 }
 
 function keyboardHandler(e) {
+  console.log(e);
   isMutated = false;
   let activeCell = grid.querySelector('[data-row="' + current.row + '"]').querySelector('[data-col="' + current.col + '"]');
   const symRow = xw.rows - 1 - current.row;
   const symCol = xw.cols - 1 - current.col;
 
-  if ((e.which >= keyboard.a && e.which <= keyboard.z) || e.which == keyboard.space) {
+  if (e.key.length === 1 && e.key !== BLACK) {
     let oldContent = xw.fill[current.row][current.col];
-    xw.fill[current.row] = xw.fill[current.row].slice(0, current.col) + String.fromCharCode(e.which) + xw.fill[current.row].slice(current.col + 1);
+    xw.fill[current.row] = xw.fill[current.row].slice(0, current.col) + e.key.toUpperCase() + xw.fill[current.row].slice(current.col + 1);
     if (oldContent == BLACK) {
       if (isSymmetrical) {
         xw.fill[symRow] = xw.fill[symRow].slice(0, symCol) + BLANK + xw.fill[symRow].slice(symCol + 1);
