@@ -24,9 +24,23 @@ openDefaultWordlist("https://raw.githubusercontent.com/keiranking/Phil/master/WL
 //____________________
 // F U N C T I O N S
 
+function preprocessFinnishWord(word) {
+  // deal with Finnish special characters
+  return word
+    .replace(/-/g, "") // remove dashes
+    .replace(/Š/g, "SH") // suhu-s
+    // remove accents
+    .replace(/[ÀÁÂ]/g, "A")
+    .replace(/[ÈÉÊ]/g, "E")
+    .replace(/Î/g, "I")
+    .replace(/Ô/g, "O")
+    .replace(/Û/g, "U")
+    .replace(/Ž/g, "Z");
+}
+
 function addToWordlist(newWords) {
   for (i = 0; i < newWords.length; i++) {
-    const word = newWords[i].trim().toUpperCase();
+    const word = preprocessFinnishWord(newWords[i].trim().toUpperCase());
     if (word.length < wordlist.length) { // Make sure we don't access outside the wordlist array
       wordlist[word.length].push(word);
     }
