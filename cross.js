@@ -277,7 +277,9 @@ current.update();
 function createNewCustomSizePuzzle() {
   let sizeStr = prompt("Input crossword size (cols x rows)", `${xw.cols}x${xw.rows}`);
   let [ , cols,  , rows] = /(\d+)( *[xX] *(\d+))?/.exec(sizeStr);
-  if (rows) createNewPuzzle(rows, cols);
+  if (!cols) return;
+  rows = rows || cols;
+  createNewPuzzle(rows, cols);
 }
 
 function createNewPuzzle(rows, cols) {
