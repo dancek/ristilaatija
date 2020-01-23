@@ -598,8 +598,8 @@ function layoutPDFClues(doc, style) {
       let currentColumn = 0;
       let x = format.marginLeft;
       let y = format.marginTop[currentColumn];
-      const acrossTitle = [{ "label": "ACROSS", "clue": " " }];
-      const downTitle = [{ "label": " ", "clue": " "}, {"label": "DOWN", "clue": " " }];
+      const acrossTitle = [{ "label": "VAAKASUORAAN", "clue": " " }];
+      const downTitle = [{ "label": " ", "clue": " "}, {"label": "PYSTYSUORAAN", "clue": " " }];
       let allClues = acrossTitle.concat(acrossClues).concat(downTitle).concat(downClues);
       for (let i = 0; i < allClues.length; i++) { // Position clue on page
         const clueText = doc.splitTextToSize(allClues[i].clue, format.clueWidth);
