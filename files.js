@@ -61,11 +61,15 @@ class PuzReader {
     for (var i = 0; i < w * h; i++) {
       if (grid[i] == '.') continue;
       var inc = 0;
-      if (i % w == 0 || grid[i - 1] == '.') {
+      if ((i % w == 0 || grid[i - 1] == '.') &&
+          (i + 1) % w == i % w &&
+          grid[i + 1] != '.') {
         across.push(label + ". " + this.readString());
         inc = 1;
       }
-      if (i < w || grid[i - w] == '.') {
+      if ((i < w || grid[i - w] == '.') &&
+          i + w < w * h &&
+          grid[i + w] != '.') {
         down.push(label + ". " + this.readString());
         inc = 1;
       }
