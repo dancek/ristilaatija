@@ -445,16 +445,21 @@ function generatePDFClues() {
     };
 
   for (const key in xw.clues) {
-    let [i, j, direction] = key.split(",");
+    const [i, j, direction] = key.split(",");
+    const answer = getWordAt(i, j, direction);
+    if (!answer || answer.length < 2)
+      continue;
+
     const cell = grid.querySelector('[data-row="' + i + '"]').querySelector('[data-col="' + j + '"]');
-    let label = Number(cell.firstChild.innerHTML);
+    const label = Number(cell.firstChild.innerHTML);
+    const clue = { "label": label, "clue": xw.clues[key], "answer": answer};
     if (direction == ACROSS) {
       // acrossClues.push([label, xw.clues[key], getWordAt(i, j, direction)]);
       // acrossClues.sort(byLabel);
-      acrossClues.push({ "label": label, "clue": xw.clues[key], "answer": getWordAt(i, j, direction)});
+      acrossClues.push(clue);
       acrossClues.sort(byLabel);
     } else {
-      downClues.push({ "label": label, "clue": xw.clues[key], "answer": getWordAt(i, j, direction)});
+      downClues.push(clue);
       downClues.sort(byLabel);
     }
   }
