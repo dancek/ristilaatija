@@ -584,9 +584,9 @@ function layoutPDFClues(doc, style) {
     default:
       const format = {
         "font": "helvetica",
-        "fontSize": 9,
-        "labelWidth": 13,
-        "clueWidth": 200,
+        "fontSize": 10,
+        "labelWidth": 15,
+        "clueWidth": 220,
         "columnSeparator": 18,
         "marginTop": [465, 465, 465, 85],
         "marginBottom": doc.internal.pageSize.height - 50,
