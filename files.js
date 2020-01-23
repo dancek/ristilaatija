@@ -602,7 +602,9 @@ function layoutPDFClues(doc, style) {
       const downTitle = [{ "label": " ", "clue": " "}, {"label": "PYSTYSUORAAN", "clue": " " }];
       let allClues = acrossTitle.concat(acrossClues).concat(downTitle).concat(downClues);
       for (let i = 0; i < allClues.length; i++) { // Position clue on page
-        const clueText = doc.splitTextToSize(allClues[i].clue, format.clueWidth);
+        const c = allClues[i];
+        const clueWithLength = c.clue + (c.answer ? ` (${c.answer.length})` : '');
+        const clueText = doc.splitTextToSize(clueWithLength, format.clueWidth);
         let adjustY = clueText.length * (format.fontSize + 2);
         if (y + adjustY > format.marginBottom) {
           currentColumn++;
