@@ -586,7 +586,7 @@ function layoutPDFClues(doc, style) {
         "font": "helvetica",
         "fontSize": 9,
         "labelWidth": 13,
-        "clueWidth": 94,
+        "clueWidth": 200,
         "columnSeparator": 18,
         "marginTop": [465, 465, 465, 85],
         "marginBottom": doc.internal.pageSize.height - 50,
