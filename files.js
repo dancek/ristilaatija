@@ -480,7 +480,7 @@ function layoutPDFGrid(doc, x, y, isFilled) {
   doc.setDrawColor(0);
   doc.setLineWidth(format.outerLineWidth);
   doc.rect(format.gridOrigin.x, format.gridOrigin.y,
-           xw.rows * format.squareSize, xw.cols * format.squareSize, 'D');
+           xw.cols * format.squareSize, xw.rows * format.squareSize, 'D');
   doc.setLineWidth(format.innerLineWidth);
   for (let i = 0; i < xw.rows; i++) {
     for (let j = 0; j < xw.cols; j++) {
