@@ -448,25 +448,17 @@ function clearSquare(row, col) {
   xw.fill[row] = xw.fill[row].slice(0, col) + BLANK + xw.fill[row].slice(col + 1);
 }
 
-function squareContainsLetter(row, col) {
-  if (row < 0
-      || col < 0
-      || row >= xw.rows
-      || col >= xw.cols)
-    return false;
-  const c = xw.fill[row][col];
-  return c !== BLACK && c !== BLANK;
-}
-
 function clearCurrentWord() {
   if (current.direction == ACROSS) {
     for (let i = current.acrossStartIndex; i < current.acrossEndIndex; i++) {
-      if (getWordAt(current.row, i, DOWN).indexOf("-") != -1)
+      const word = getWordAt(current.row, i, DOWN);
+      if (word.length == 1 || word.indexOf("-") != -1)
         clearSquare(current.row, i);
     }
   } else {
     for (let j = current.downStartIndex; j < current.downEndIndex; j++) {
-      if (getWordAt(j, current.col, ACROSS).indexOf("-") != -1)
+      const word = getWordAt(j, current.col, DOWN);
+      if (word.length == 1 || word.indexOf("-") != -1)
         clearSquare(j, current.col);
     }
   }
