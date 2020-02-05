@@ -461,14 +461,12 @@ function squareContainsLetter(row, col) {
 function clearCurrentWord() {
   if (current.direction == ACROSS) {
     for (let i = current.acrossStartIndex; i < current.acrossEndIndex; i++) {
-      if (!squareContainsLetter(current.row - 1, i)
-          && !squareContainsLetter(current.row + 1, i))
+      if (getWordAt(current.row, i, DOWN).indexOf("-") != -1)
         clearSquare(current.row, i);
     }
   } else {
     for (let j = current.downStartIndex; j < current.downEndIndex; j++) {
-      if (!squareContainsLetter(j, current.col - 1)
-          && !squareContainsLetter(j, current.col + 1))
+      if (getWordAt(j, current.col, ACROSS).indexOf("-") != -1)
         clearSquare(j, current.col);
     }
   }
