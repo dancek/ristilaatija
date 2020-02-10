@@ -711,24 +711,19 @@ function suppressEnterKey(e) {
   }
 }
 
+let _pattern = 0; // different pattern every other time
 function generatePattern() {
-  let title = xw.title;
-  let author = xw.author;
-  createNewPuzzle();
-  xw.title = title;
-  xw.author = author;
+  _pattern = (_pattern + 1) % 2;
 
-  const pattern = patterns[randomNumber(0, patterns.length)]; // select random pattern
-  if (!isSymmetrical) { // patterns are encoded as only one half of the grid...
-    toggleSymmetry();   // so symmetry needs to be on to populate correctly
-  }
-  for (let i = 0; i < pattern.length; i++) {
-    const row = pattern[i][0];
-    const col = pattern[i][1];
-    const symRow = xw.rows - 1 - row;
-    const symCol = xw.cols - 1 - col;
-    xw.fill[row] = xw.fill[row].slice(0, col) + BLACK + xw.fill[row].slice(col + 1);
-    xw.fill[symRow] = xw.fill[symRow].slice(0, symCol) + BLACK + xw.fill[symRow].slice(symCol + 1);
+  const blankRow = BLANK.repeat(xw.cols);
+  const patternRow = (BLACK + BLANK).repeat(xw.cols).substring(_pattern, xw.cols + _pattern);
+
+  for (let row = 0; row < xw.rows; row++) {
+    if (row % 2 === _pattern) {
+      xw.fill[row] = patternRow;
+    } else {
+      xw.fill[row] = blankRow;
+    }
   }
   isMutated = true;
   updateUI();
