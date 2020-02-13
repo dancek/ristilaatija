@@ -545,6 +545,11 @@ function layoutPDFInfo(doc, style) {
       doc.setFontSize(9);
       doc.setFontType("bold");
       doc.text(50, 50 + 20, xw.author.toUpperCase());
+      if (xw.copyright) {
+        const authorWidth = doc.getTextWidth(xw.author.toUpperCase());
+        doc.setFontType("normal");
+        doc.text(50 + authorWidth + 8, 50 + 20, xw.copyright);
+      }
       break;
   }
   return 1;

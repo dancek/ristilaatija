@@ -145,6 +145,7 @@ h1 {
 #header {
   /*width: 885px;*/
   margin-left: 38px;
+  margin-bottom: 4px;
   min-height: 36px;
 }
 
@@ -246,6 +247,10 @@ kbd {
   overflow: hidden;
   font-weight: 500;
   color: var(--black);
+}
+
+#puzzle-copyright {
+  font-size: 1rem;
 }
 
 #sidebar {

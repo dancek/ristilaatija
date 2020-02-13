@@ -704,6 +704,12 @@ function setAuthor() {
   xw.author = document.getElementById("puzzle-author").innerHTML;
 }
 
+function setCopyright() {
+  const copyright = document.getElementById("puzzle-copyright").innerHTML;
+  if (copyright !== "Copyright (optional")
+    xw.copyright = copyright;
+}
+
 function suppressEnterKey(e) {
   if (e.which == keyboard.enter) {
     e.preventDefault();
