@@ -347,8 +347,12 @@ function convertJSONToPuzzle(puz) {
   updateUI();
 }
 
+function getFilename(format) {
+  return xw.title.toLowerCase().replace(" ", "_") + "." + format;
+}
+
 function writeFile(format) {
-  let filename = xw.title + "." + format;
+  let filename = getFilename(format);
   let serialized = convertPuzzleToJSON();
   let fileContents;
   switch (format) {
@@ -426,7 +430,7 @@ function printPDF(style) {
       layoutPDFInfo(doc);
       break;
   }
-  doc.save(xw.title + ".pdf"); // Generate PDF and automatically download it
+  doc.save(getFilename("pdf")); // Generate PDF and automatically download it
 }
 
 function generatePDFClues() {
