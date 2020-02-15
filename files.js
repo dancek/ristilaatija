@@ -378,6 +378,8 @@ function convertPuzzleToJSON() {
   let puz = {};
   puz["author"] = xw.author;
   puz["title"] = xw.title;
+  if (xw.copyright)
+    puz["copyright"] = xw.copyright;
   puz["size"] = {
     "rows": xw.rows,
     "cols": xw.cols
