@@ -109,7 +109,7 @@ function matchFromWordlist(word) {
   const l = word.length;
   const actualLettersInWord = word.replace(/-/g, "").length;
   if (actualLettersInWord >= 1 && actualLettersInWord < l) { // Only search if word isn't completely blank or filled
-    word = word.split(DASH).join("\\w");
+    word = word.split(DASH).join(".");
     const pattern = new RegExp(word);
     let matches = [];
     for (let i = 0; i < wordlist[l].length; i++) {
