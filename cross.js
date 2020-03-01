@@ -1,6 +1,8 @@
-// Phil
+// ristilaatija
 // ------------------------------------------------------------------------
-// Copyright 2017 Keiran King
+// Copyright 2017-2018 Keiran King,
+//           2017 Raph Levien,
+//           2020 Hannu Hartikainen
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
