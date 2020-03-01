@@ -721,13 +721,15 @@ function suppressEnterKey(e) {
 
 let _pattern = 0; // different pattern every other time
 function generatePattern() {
-  _pattern = (_pattern + 1) % 2;
+  _pat_y = +(_pattern < 2);
+  _pattern = (_pattern + 1) % 4;
+  _pat_x = +(_pattern < 2);
 
   const blankRow = BLANK.repeat(xw.cols);
-  const patternRow = (BLACK + BLANK).repeat(xw.cols).substring(_pattern, xw.cols + _pattern);
+  const patternRow = (BLACK + BLANK).repeat(xw.cols).substring(_pat_x, xw.cols + _pat_x);
 
   for (let row = 0; row < xw.rows; row++) {
-    if (row % 2 === _pattern) {
+    if (row % 2 === _pat_y) {
       xw.fill[row] = patternRow;
     } else {
       xw.fill[row] = blankRow;
