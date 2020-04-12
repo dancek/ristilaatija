@@ -563,6 +563,12 @@ function layoutPDFInfo(doc, style) {
   return 1;
 }
 
+function clueWithLength(clue, answer) {
+  return clue.match(/\((\d+, *)*\d+\) *$/) // ends with (5) or (2,3) or such?
+          ? clue
+          : clue + (answer ? ` (${answer.length})` : '');
+}
+
 function layoutPDFClues(doc, style) {
   const [acrossClues, downClues] = generatePDFClues();
 
@@ -614,8 +620,7 @@ function layoutPDFClues(doc, style) {
       let allClues = acrossTitle.concat(acrossClues).concat(downTitle).concat(downClues);
       for (let i = 0; i < allClues.length; i++) { // Position clue on page
         const c = allClues[i];
-        const clueWithLength = c.clue + (c.answer ? ` (${c.answer.length})` : '');
-        const clueText = doc.splitTextToSize(clueWithLength, format.clueWidth);
+        const clueText = doc.splitTextToSize(clueWithLength(c.clue, c.answer), format.clueWidth);
         let adjustY = clueText.length * (format.fontSize + 2);
         if (y + adjustY > format.marginBottom) {
           currentColumn++;
