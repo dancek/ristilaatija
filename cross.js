@@ -31,9 +31,10 @@ const BLANK = " ";
 const ACROSS = "across";
 const DOWN = "down";
 const DEFAULT_SIZE = 13;
-const DEFAULT_TITLE = "Untitled";
-const DEFAULT_AUTHOR = "Anonymous";
-const DEFAULT_CLUE = "(blank clue)";
+const DEFAULT_TITLE = `Piilosana ${new Date().toISOString().split('T')[0]}`;
+const DEFAULT_AUTHOR = "Hannu Hartikainen";
+const DEFAULT_COPYRIGHT = "https://hannuhartikainen.fi/piilosanat";
+const DEFAULT_CLUE = "";
 const DEFAULT_NOTIFICATION_LIFETIME = 10; // in seconds
 
 let history = [];
@@ -56,6 +57,7 @@ class Crossword {
     this.clues = {};
     this.title = DEFAULT_TITLE;
     this.author = DEFAULT_AUTHOR;
+    this.copyright = DEFAULT_COPYRIGHT;
     this.rows = rows;
     this.cols = cols;
     this.fill = [];
@@ -288,6 +290,7 @@ function createNewPuzzle(rows, cols) {
   xw["clues"] = {};
   xw["title"] = DEFAULT_TITLE;
   xw["author"] = DEFAULT_AUTHOR;
+  xw["copyright"] = DEFAULT_COPYRIGHT;
   xw["rows"] = rows || DEFAULT_SIZE;
   xw["cols"] = cols || xw.rows;
   xw["fill"] = [];
@@ -536,6 +539,7 @@ function updateCluesUI() {
 function updateInfoUI() {
   document.getElementById("puzzle-title").innerHTML = xw.title;
   document.getElementById("puzzle-author").innerHTML = xw.author;
+  document.getElementById("puzzle-copyright").innerHTML = xw.copyright;
 }
 
 function createGrid(rows, cols) {
@@ -718,9 +722,7 @@ function setAuthor() {
 }
 
 function setCopyright() {
-  const copyright = document.getElementById("puzzle-copyright").innerHTML;
-  if (copyright !== "Copyright (optional")
-    xw.copyright = copyright;
+  xw.copyright = document.getElementById("puzzle-copyright").innerHTML;
 }
 
 function suppressEnterKey(e) {
