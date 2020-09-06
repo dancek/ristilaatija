@@ -475,6 +475,17 @@ function updateUI() {
   updateMatchesUI();
   updateCluesUI();
   updateInfoUI();
+  updateClueList();
+}
+
+function updateClueList() {
+  const wordsAndClues = Object.keys(xw.clues).map(key =>
+    `${getWordAt(...key.split(','))} – ${xw.clues[key]}`)
+    .sort()
+    .join("\n");
+
+  const clueList = document.getElementById('clue-list');
+  clueList.innerHTML = wordsAndClues;
 }
 
 function updateGridUI() {

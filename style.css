@@ -428,6 +428,10 @@ kbd {
   background: var(--lt-blue);
 }
 
+#clue-list {
+  white-space: pre-line;
+}
+
 .clue {
   margin: 0;
   padding: 0;
