@@ -271,7 +271,21 @@ new Notification(document.getElementById("shortcuts").innerHTML, 300);
 // new Notification("Tip: <kbd>.</kbd> makes a black square.", 300);
 // new Notification("Tip: <kbd>Enter</kbd> toggles direction.", 300);
 
-let xw = new Crossword(); // model
+//____________________
+// S T O R A G E
+
+const storageKey = "ristilaatija";
+function loadFromStorage() {
+  const data = localStorage.getItem(storageKey)
+  if (!data) return new Crossword();
+
+  return JSON.parse(data);
+}
+function saveToStorage(data) {
+  localStorage.setItem(storageKey, JSON.stringify(data));
+}
+
+let xw = loadFromStorage(); // model
 let current = new Interface(xw.rows, xw.cols); // view-controller
 current.update();
 
@@ -479,6 +493,8 @@ function updateUI() {
   updateCluesUI();
   updateInfoUI();
   updateClueList();
+
+  saveToStorage(xw);
 }
 
 function updateClueList() {
