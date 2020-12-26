@@ -16,8 +16,11 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Droid Sans", "Arial", sans-serif;
-  width: 885px;
   margin: 5px;
+}
+
+.flex {
+  display: flex;
 }
 
 h1 {
@@ -143,7 +146,6 @@ h1 {
 }
 
 #header {
-  /*width: 885px;*/
   margin-left: 38px;
   margin-bottom: 4px;
   min-height: 36px;
@@ -172,8 +174,6 @@ kbd {
 
 #main {
   width: auto;
-  height: 550px;
-  float: left;
 }
 
 .notification {
@@ -253,32 +253,33 @@ kbd {
   font-size: 1rem;
 }
 
-#sidebar {
-  width: 260px;
-  height: 550px;
-  float: left;
+.sidebar {
   margin-left: 8px;
+  overflow-y: scroll;
+  max-height: 90vh;
+  flex: 1;
 }
 
-#sidebar .current-word {
+.sidebar .current-word {
   margin:0;
-  font-size: 21pt;
-  font-weight: 300;
+  font-size: 140%;
+  font-family: monospace;
+  white-space: nowrap;
 }
 
-#sidebar .direction-heading {
+.sidebar .direction-heading {
   padding: 3px 0 2px 0;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
 
 }
 
-#sidebar .direction-heading.highlight {
+.sidebar .direction-heading.highlight {
   border-top: 1px solid var(--med-blue);
   border-bottom: 1px solid var(--med-blue);
 }
 
-#sidebar ul.matches {
+.sidebar ul.matches {
   margin: 0;
   height: 70%;
   /*width: 160px;*/
@@ -290,13 +291,13 @@ kbd {
   overflow-y: scroll;
 }
 
-#sidebar ul.matches li {
+.sidebar ul.matches li {
   margin: 2px 0;
   cursor: pointer;
   user-select: none;
 }
 
-#sidebar ul.matches li:hover {
+.sidebar ul.matches li:hover {
   background: var(--lt-grey); /* For browsers that do not support gradients */
   color: var(--black);
   font-weight: 500;
