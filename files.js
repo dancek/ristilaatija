@@ -473,8 +473,9 @@ function generatePDFClues() {
 }
 
 function layoutPDFGrid(doc, x, y, isFilled) {
+  const size = Math.max(xw.cols, xw.rows);
   let format = {
-    "squareSize":     24,
+    "squareSize":     Math.min(24, Math.floor(370 / size)),
     // "pageOrigin":     { "x": 50, "y": 50 },
     "gridOrigin":     { "x": x, "y": y },
     "labelOffset":    { "x": 1, "y": 6 },
@@ -563,7 +564,8 @@ function layoutPDFInfo(doc, style) {
   return 1;
 }
 
-function clueWithLength(clue, answer) {
+function clueWithLength(rawClue, answer) {
+  const clue = rawClue.replace("&amp;", "&");
   return clue.match(/\((\d+, *)*\d+\) *$/) // ends with (5) or (2,3) or such?
           ? clue
           : clue + (answer ? ` (${answer.length})` : '');
@@ -606,7 +608,7 @@ function layoutPDFClues(doc, style) {
         "clueWidth": 220,
         "columnSeparator": 18,
         "marginTop": [465, 465, 465, 85],
-        "marginBottom": doc.internal.pageSize.height - 50,
+        "marginBottom": 20,
         "marginLeft": 50,
         "marginRight": 0
       };
@@ -622,7 +624,7 @@ function layoutPDFClues(doc, style) {
         const c = allClues[i];
         const clueText = doc.splitTextToSize(clueWithLength(c.clue, c.answer), format.clueWidth);
         let adjustY = clueText.length * (format.fontSize + 2);
-        if (y + adjustY > format.marginBottom) {
+        if (y + adjustY > doc.internal.pageSize.height - format.marginBottom) {
           currentColumn++;
           x += format.labelWidth + format.clueWidth + format.columnSeparator;
           y = format.marginTop[currentColumn];
